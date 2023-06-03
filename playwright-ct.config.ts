@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/experimental-ct-react';
+import { defineConfig, devices } from '@playwright/experimental-ct-react'
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -25,22 +25,22 @@ export default defineConfig({
     trace: 'on-first-retry',
 
     /* Port to use for Playwright component endpoint. */
-    ctPort: 3100,
+    ctPort: 3100
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'] }
     },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-  ],
-});
+      use: { ...devices['Desktop Firefox'] }
+    }
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
+  ]
+})
