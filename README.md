@@ -1,21 +1,18 @@
-![reactjs-vite-tailwindcss-boilerplate](https://user-images.githubusercontent.com/16243531/217138979-b854309c-4742-4275-a705-f9fec5158217.jpg)
+# Furry-fe-assignment
+Solution to a Front End assignment: https://github.com/budbee/frontend-assignment
 
-# React Tailwindcss Boilerplate build with Vite
 
-This is a boilerplate build with Vite, React 18, TypeScript, Vitest, Testing Library, TailwindCSS 3, Eslint and Prettier.
+# Architecture concept
+|  ![Screenshot 2023-06-03 at 16 05 12](https://github.com/skobak/fluffy-fe-assignment/assets/6191306/f9a4bf65-f643-4aee-a1eb-aa77cf8e623d)     |![Screenshot 2023-06-03 at 16 05 22](https://github.com/skobak/fluffy-fe-assignment/assets/6191306/386096e2-e64d-4c0b-aece-4e7ef2e84165)  |  ![Screenshot 2023-06-03 at 16 05 27](https://github.com/skobak/fluffy-fe-assignment/assets/6191306/131a3aab-740d-4b6b-b968-58f5099b2cfa)   |
+| :---        |    :----:   |          ---: |
+| Folder structure      | Component .ts structure       | State (Context) Architecture   |
 
-## What is inside?
 
-This project uses many tools like:
+# Design prototype(Figma)
+![image](https://github.com/skobak/fluffy-fe-assignment/assets/6191306/aa301ff1-a939-494b-910b-f485a434c088)
 
-- [Vite](https://vitejs.dev)
-- [ReactJS](https://reactjs.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [Vitest](https://vitest.dev)
-- [Testing Library](https://testing-library.com)
-- [Tailwindcss](https://tailwindcss.com)
-- [Eslint](https://eslint.org)
-- [Prettier](https://prettier.io)
+https://www.figma.com/file/fGxk6D5nNuOadh1lBhEd2O/FurryFirendsFE?type=design&node-id=1%3A3346&t=R1E99VqUuKJZa3Ju-1
+
 
 ## Getting Started
 
@@ -24,13 +21,13 @@ This project uses many tools like:
 Create the project.
 
 ```bash
-npx degit joaopaulomoraes/reactjs-vite-tailwindcss-boilerplate my-app
+git clone git@github.com:skobak/fluffy-task.git
 ```
 
 Access the project directory.
 
 ```bash
-cd my-app
+cd fluffy-task
 ```
 
 Install dependencies.
