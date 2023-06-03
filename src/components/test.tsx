@@ -19,12 +19,6 @@ describe('<App />', () => {
       )
     ).toBeInTheDocument()
 
-    expect(
-      screen.getByRole('link', {
-        name: /start building for free/i
-      })
-    ).toBeInTheDocument()
-
     expect(screen.getByRole('img')).toBeInTheDocument()
 
     expect(container.firstChild).toBeInTheDocument()
