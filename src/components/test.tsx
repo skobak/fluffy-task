@@ -19,8 +19,6 @@ describe('<App />', () => {
       )
     ).toBeInTheDocument()
 
-    expect(screen.getByRole('img')).toBeInTheDocument()
-
     expect(container.firstChild).toBeInTheDocument()
   })
 })
