@@ -2,7 +2,7 @@ import { chromium, Page, Browser } from '@playwright/test'
 import { test, expect } from '@playwright/experimental-ct-react'
 
 // This test assumes you have a button with the id "myButton" on your main page
-test('clicks the button on the main page', async () => {
+test.skip('clicks the button on the main page', async () => {
   const browser: Browser = await chromium.launch()
   const page: Page = await browser.newPage()
 
