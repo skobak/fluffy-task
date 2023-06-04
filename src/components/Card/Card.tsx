@@ -3,7 +3,7 @@ import PlaceholderImage from './images/catPlaceholder.svg'
 
 interface CardProps {
   title: string
-  description: string
+  description?: string
   imgUrl?: string
   imgAlt?: string
 }
@@ -30,7 +30,10 @@ const Card: React.FC<CardProps> = ({ title, description, imgUrl, imgAlt }) => {
           <h2 className="text-sm font-semibold uppercase tracking-wide text-indigo-500">
             {title}
           </h2>
-          <p className="mt-2 text-gray-500">{description}</p>
+          {!description && (
+            <p className="mt-2 italic text-gray-300">No description provided</p>
+          )}
+          {description && <p className="mt-2 text-gray-500">{description}</p>}
         </div>
       </div>
     </div>
