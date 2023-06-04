@@ -16,6 +16,10 @@ type CatContextType = {
   deleteCat: (id: string) => void
 }
 
+type ContainerProps = {
+  children: React.ReactNode
+}
+
 const CatContextDefaultValues: CatContextType = {
   cats: [],
   addCat: () => {
@@ -31,7 +35,9 @@ const CatContextDefaultValues: CatContextType = {
 
 export const CatContext = createContext<CatContextType>(CatContextDefaultValues)
 
-export const CatProvider: React.FC = ({ children }) => {
+export const CatProvider: React.FC<ContainerProps> = (
+  props: ContainerProps
+) => {
   const [cats, setCats] = useState<Cat[]>([])
 
   const addCat = (cat: Cat) => setCats((prevCats) => [...prevCats, cat])
@@ -46,7 +52,7 @@ export const CatProvider: React.FC = ({ children }) => {
 
   return (
     <CatContext.Provider value={{ cats, addCat, updateCat, deleteCat }}>
-      {children}
+      {props.children}
     </CatContext.Provider>
   )
 }
