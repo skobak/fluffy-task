@@ -6,19 +6,51 @@ const meta = {
   component: Card,
   tags: ['autodocs'],
   argTypes: {
-    title: 'string',
-    description: 'string',
-    imgUrl: 'string',
-    imgAlt: 'string'
+    title: {
+      name: 'title',
+      type: { name: 'string', required: true },
+      default: 'Card'
+    },
+    description: {
+      name: 'description',
+      type: { name: 'string', required: true },
+      default: 'This is a card'
+    },
+    imgUrl: {
+      name: 'imgUrl',
+      type: { name: 'string', required: false }
+    },
+    imgAlt: {
+      name: 'imgAlt',
+      type: { name: 'string', required: false }
+    }
   }
 } satisfies Meta<typeof Card>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {
+export const LongName: Story = {
   args: {
-    title: 'Card',
-    description: 'This is a card'
+    title:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.'
+  }
+}
+
+export const ShortName: Story = {
+  args: {
+    title: 'Cat',
+    description: 'This is a cat'
+  }
+}
+
+export const WithImage: Story = {
+  args: {
+    title: 'Cat',
+    description: 'This is a cat',
+    imgUrl: 'https://skob.io/ava.jpeg',
+    imgAlt: 'Avatar'
   }
 }
