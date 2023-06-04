@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
@@ -77,12 +78,11 @@
     "vitest": "^0.31.1"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write"
+    "*.{js,jsx,ts,tsx}": [
+        "prettier --write",
+        "eslint --fix"
     ],
-    "src/**/*.{js,jsx,ts,tsx,json}": [
-      "eslint --max-warnings=0"
-    ]
+    "*.{css,md}": "prettier --write"
   },
   "eslintConfig": {
     "extends": [
