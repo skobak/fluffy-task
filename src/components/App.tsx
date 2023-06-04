@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Card from './Card'
 
 function App() {
   // add
@@ -43,6 +44,10 @@ function App() {
                 {serverMessage}
               </p>
             )}
+            <Card
+              title="Card Title"
+              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris"
+            />
           </div>
         </div>
       </div>
