@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Card } from './Card'
+import { Card } from '../Card'
 
 const meta = {
   title: 'App/Card',
@@ -13,8 +13,7 @@ const meta = {
     },
     description: {
       name: 'description',
-      type: { name: 'string', required: true },
-      default: 'This is a card'
+      type: { name: 'string', required: false }
     },
     imgUrl: {
       name: 'imgUrl',
@@ -43,6 +42,12 @@ export const ShortName: Story = {
   args: {
     title: 'Cat',
     description: 'This is a cat'
+  }
+}
+
+export const NoDescription: Story = {
+  args: {
+    title: 'Cat'
   }
 }
 
