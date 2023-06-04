@@ -26,6 +26,10 @@ jobs:
       - name: Install Playwright
         run: npx playwright install
 
+        #  run server in dev mode
+      - name: Start server
+        run: pnpm run dev
+
       - name: Run unit tests
         run: pnpm run test
 
