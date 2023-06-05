@@ -5,12 +5,13 @@ import { v4 as uuidv4 } from 'uuid'
 import Card from '../components/Card'
 import DialogConfirmation from '../components/DialogConfirmation'
 import { Cat } from '../models/Cat'
+import CardForm, { CardFormData } from '../components/CardForm/CardForm'
 
 const CatListPage: React.FC = () => {
   const newCatBlank: Cat = {
     id: uuidv4(),
     name: 'The Cat',
-    birthdayDate: '2021-01-01',
+    birthdayDate: new Date(),
     bio: '',
     photo: '',
     gender: 'female'
@@ -18,7 +19,8 @@ const CatListPage: React.FC = () => {
   const { cats, addCat, deleteCat, updateCat } = useContext(CatContext)
 
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false)
-  const [currentCat, setCurrentCat] = useState<Cat | null>(null)
+  const [isEditMode, setIsEditMode] = useState(false)
+  const [currentCat, setCurrentCat] = useState<Cat>()
 
   return (
     <div>
@@ -35,12 +37,32 @@ const CatListPage: React.FC = () => {
           />
         </dialog>
       )}
+      {isEditMode && (
+        <dialog open>
+          <CardForm
+            cat={currentCat}
+            cancel={() => setIsEditMode(false)}
+            confirm={(data: CardFormData) => {
+              console.log(data)
+              const updatedCat = {
+                id: currentCat?.id || '',
+                ...data
+              }
+              updateCat(updatedCat)
+              setIsEditMode(false)
+            }}
+          />
+        </dialog>
+      )}
       <div className="flex w-full flex-wrap gap-4">
         {cats.map((cat: Cat) => (
           <div key={cat.id}>
             <Card
               cat={cat}
-              editClicked={() => console.log('edit clicked')}
+              editClicked={() => {
+                setCurrentCat(cat)
+                setIsEditMode(true)
+              }}
               deleteClicked={() => {
                 setIsConfirmationOpen(true)
                 setCurrentCat(cat)
