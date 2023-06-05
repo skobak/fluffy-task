@@ -20,20 +20,16 @@ const CatListPage: React.FC = () => {
 
   return (
     <div>
-      <div>
-        <SearchBar
-          onSearch={function (search: string): void {
-            setSearchQuery(search)
-          }}
-        />
-      </div>
-      <div>
-        <SortBy
-          onSort={function (order: 'ASC' | 'DESC'): void {
-            setSortByOrder(order)
-          }}
-        />
-      </div>
+      <SearchBar
+        onSearch={function (search: string): void {
+          setSearchQuery(search)
+        }}
+      />
+      <SortBy
+        onSort={function (order: 'ASC' | 'DESC'): void {
+          setSortByOrder(order)
+        }}
+      />
       {isConfirmationOpen && (
         <dialog open>
           <DialogConfirmation
@@ -72,7 +68,7 @@ const CatListPage: React.FC = () => {
           />
         </dialog>
       )}
-      <div className="flex w-full flex-wrap gap-4">
+      <div className="mx-auto flex w-full max-w-7xl flex-wrap gap-4">
         {cats
           .filter((cat: Cat) => {
             return (
@@ -92,7 +88,7 @@ const CatListPage: React.FC = () => {
             }
           })
           .map((cat: Cat) => (
-            <div key={cat.id}>
+            <div key={cat.id} className="w-full md:h-72 md:max-w-sm">
               <Card
                 cat={cat}
                 editClicked={() => {
@@ -104,12 +100,9 @@ const CatListPage: React.FC = () => {
                   setCurrentCat(cat)
                 }}
               />
-              <button onClick={() => updateCat({ ...cat, name: 'The Cat2' })}>
-                Update
-              </button>
             </div>
           ))}
-        <div>
+        <div className="w-full md:h-72 md:max-w-sm">
           <NewCard
             onClick={() => {
               setCurrentCat(null)

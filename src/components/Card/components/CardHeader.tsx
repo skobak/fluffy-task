@@ -12,12 +12,20 @@ const CardHeader: React.FC<CardHeaderProps> = ({
 }) => {
   return (
     <div className="flex justify-between p-2">
-      <h2 className="text-xl font-semibold">Card Title</h2>
+      <div></div>
       <div className="space-x-2">
-        <button onClick={editClicked}>
+        <button
+          onClick={editClicked}
+          aria-label="Edit"
+          className="focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
           <PencilIcon className="h-6 w-6 text-gray-500 hover:text-blue-500" />
         </button>
-        <button onClick={deleteClicked}>
+        <button
+          onClick={deleteClicked}
+          aria-label="Delete"
+          className="focus:outline-none focus:ring-2 focus:ring-red-500"
+        >
           <TrashIcon className="h-6 w-6 text-gray-500 hover:text-red-500" />
         </button>
       </div>
