@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/experimental-ct-react'
-import App from './App'
+import App from '../src/components/App'
 
 test.use({ viewport: { width: 500, height: 500 } })
 

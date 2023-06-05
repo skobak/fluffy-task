@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
-import { getFromLocalStorage, saveToLocalStorage } from '../utils'
+import { getFromLocalStorage, saveToLocalStorage } from '../../utils'
 
 // This hook is act as a provider for cats data
 // and fake backend with localStorage
-
 export type Cat = {
   id: string
   photo: string
