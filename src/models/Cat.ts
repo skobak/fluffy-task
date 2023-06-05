@@ -1,8 +1,10 @@
-export type Cat = {
+export type CatGender = 'unknown' | 'female' | 'male'
+
+export interface Cat {
   id: string
   photo?: string
   name?: string
-  birthdayDate?: string
-  gender?: string
+  birthdayDate?: Date
+  gender?: CatGender
   bio?: string
 }
