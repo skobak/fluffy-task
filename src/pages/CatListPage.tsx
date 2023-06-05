@@ -11,7 +11,7 @@ const CatListPage: React.FC = () => {
   const newCatBlank: Cat = {
     id: uuidv4(),
     name: 'The Cat',
-    birthdayDate: '2021-01-01',
+    birthdayDate: new Date(),
     bio: '',
     photo: '',
     gender: 'female'

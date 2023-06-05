@@ -6,7 +6,7 @@ import { Cat } from '../../../models/Cat'
 const catMock: Cat = {
   id: '1',
   name: 'name',
-  birthdayDate: '2021-01-01',
+  birthdayDate: new Date('2020-01-01T00:00:00.000Z'),
   gender: 'female',
   bio: 'bio',
   photo: ''
@@ -48,7 +48,9 @@ describe('test useCatProvider hook with localStorage', () => {
     })
     const catFromLocalStorage = getFromLocalStorage('cats')
     if (!catFromLocalStorage) throw new Error('No cats in local storage')
-    expect(JSON.parse(catFromLocalStorage)).toEqual([catMock])
+    expect(JSON.parse(catFromLocalStorage)).toEqual([
+      JSON.parse(JSON.stringify(catMock))
+    ])
   })
   it('should remove the cat from local storage', () => {
     const { result } = renderHook(() => useCatProvider())
@@ -68,7 +70,7 @@ describe('test useCatProvider hook with localStorage', () => {
     const catFromLocalStorage = getFromLocalStorage('cats')
     if (!catFromLocalStorage) throw new Error('No cats in local storage')
     expect(JSON.parse(catFromLocalStorage)).toEqual([
-      { ...catMock, name: 'new name' }
+      JSON.parse(JSON.stringify({ ...catMock, name: 'new name' }))
     ])
   })
 })
