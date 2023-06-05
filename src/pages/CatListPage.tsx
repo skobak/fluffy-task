@@ -1,28 +1,20 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import NewCard from '../components/NewCard'
 import { CatContext } from '../provider/CatProvider'
-import { v4 as uuidv4 } from 'uuid'
 import Card from '../components/Card'
 import DialogConfirmation from '../components/DialogConfirmation'
 import { Cat } from '../models/Cat'
 import CardForm, { CardFormData } from '../components/CardForm/CardForm'
 import SearchBar from '../components/SearchBar'
 import SortBy from '../components/SortBy'
+import { v4 as uuidv4 } from 'uuid'
 
 const CatListPage: React.FC = () => {
-  const newCatBlank: Cat = {
-    id: uuidv4(),
-    name: 'The Cat',
-    birthdayDate: new Date(),
-    bio: '',
-    photo: '',
-    gender: 'female'
-  }
   const { cats, addCat, deleteCat, updateCat } = useContext(CatContext)
 
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
-  const [currentCat, setCurrentCat] = useState<Cat>()
+  const [currentCat, setCurrentCat] = useState<Cat | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [sortByOrder, setSortByOrder] = useState<'ASC' | 'DESC'>('ASC')
 
@@ -62,12 +54,19 @@ const CatListPage: React.FC = () => {
             cancel={() => setIsEditMode(false)}
             confirm={async (data: CardFormData, fileData: string | null) => {
               console.log(data)
-              const updatedCat = {
-                id: currentCat?.id || '',
-                ...data,
-                photo: fileData || ''
+              if (currentCat == null) {
+                addCat({
+                  id: uuidv4(),
+                  ...data,
+                  photo: fileData || ''
+                })
+              } else {
+                updateCat({
+                  id: currentCat?.id || '',
+                  ...data,
+                  photo: fileData || ''
+                })
               }
-              updateCat(updatedCat)
               setIsEditMode(false)
             }}
           />
@@ -111,7 +110,12 @@ const CatListPage: React.FC = () => {
             </div>
           ))}
         <div>
-          <NewCard onClick={() => addCat(newCatBlank)} />
+          <NewCard
+            onClick={() => {
+              setCurrentCat(null)
+              setIsEditMode(true)
+            }}
+          />
         </div>
       </div>
     </div>

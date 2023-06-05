@@ -11,7 +11,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const EmptyForm: Story = {
-  args: {}
+  args: {
+    cat: null
+  }
 }
 
 export const FilledForm: Story = {
