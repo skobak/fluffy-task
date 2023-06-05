@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import Card from '../components/Card'
 
 const CatListPage: React.FC = () => {
-  const { cats, addCat } = useContext(CatContext)
+  const { cats, addCat, deleteCat, updateCat } = useContext(CatContext)
 
   const newCatBlank: Cat = {
     id: uuidv4(),
@@ -17,11 +17,19 @@ const CatListPage: React.FC = () => {
   }
 
   return (
-    <div className="mx-auto flex max-w-7xl flex-wrap">
+    <div className="flex w-full flex-wrap gap-4">
       {cats.map((cat: Cat) => (
-        <Card key={cat.id} title={cat.name} description={cat.bio} />
+        <div key={cat.id}>
+          <Card title={cat.name} description={cat.bio} />
+          <button onClick={() => deleteCat(cat.id)}>Delete</button>
+          <button onClick={() => updateCat({ ...cat, name: 'The Cat2' })}>
+            Update
+          </button>
+        </div>
       ))}
-      <NewCard onClick={() => addCat(newCatBlank)} />
+      <div>
+        <NewCard onClick={() => addCat(newCatBlank)} />
+      </div>
     </div>
   )
 }
