@@ -18,7 +18,9 @@ const DialogConfirmation: React.FC<DialogConfirmationProps> = ({
   return (
     <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50">
       <div className="w-1/3 rounded-lg bg-white">
-        <div>{imageURL && <img src={imageURL} alt="cat" />}</div>
+        <div className="max-h-48 overflow-hidden">
+          {imageURL && <img src={imageURL} alt="cat" />}
+        </div>
         <div className="p-6">
           <p className="mb-4 text-lg">{message}</p>
           <div className="flex justify-end">
