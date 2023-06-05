@@ -1,4 +1,5 @@
-import { createContext, useState } from 'react'
+import { createContext } from 'react'
+import { useCatProvider } from '../hooks/useCatProvider'
 
 export type Cat = {
   id: string
@@ -38,17 +39,7 @@ export const CatContext = createContext<CatContextType>(CatContextDefaultValues)
 export const CatProvider: React.FC<ContainerProps> = (
   props: ContainerProps
 ) => {
-  const [cats, setCats] = useState<Cat[]>([])
-
-  const addCat = (cat: Cat) => setCats((prevCats) => [...prevCats, cat])
-
-  const updateCat = (updatedCat: Cat) =>
-    setCats((prevCats) =>
-      prevCats.map((cat) => (cat.id === updatedCat.id ? updatedCat : cat))
-    )
-
-  const deleteCat = (id: string) =>
-    setCats((prevCats) => prevCats.filter((cat) => cat.id !== id))
+  const { cats, addCat, updateCat, deleteCat } = useCatProvider()
 
   return (
     <CatContext.Provider value={{ cats, addCat, updateCat, deleteCat }}>
