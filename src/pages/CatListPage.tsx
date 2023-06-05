@@ -20,95 +20,99 @@ const CatListPage: React.FC = () => {
 
   return (
     <div>
-      <SearchBar
-        onSearch={function (search: string): void {
-          setSearchQuery(search)
-        }}
-      />
-      <SortBy
-        onSort={function (order: 'ASC' | 'DESC'): void {
-          setSortByOrder(order)
-        }}
-      />
-      {isConfirmationOpen && (
-        <dialog open>
-          <DialogConfirmation
-            cancel={() => setIsConfirmationOpen(false)}
-            confirm={() => {
-              setIsConfirmationOpen(false)
-              deleteCat(currentCat?.id || '')
-            }}
-            message={`Are you sure you want to delete ${currentCat?.name} ?`}
-            imageURL={currentCat?.photo}
-          />
-        </dialog>
-      )}
-      {isEditMode && (
-        <dialog open>
-          <CardForm
-            cat={currentCat}
-            cancel={() => setIsEditMode(false)}
-            confirm={async (data: CardFormData, fileData: string | null) => {
-              console.log(data)
-              if (currentCat == null) {
-                addCat({
-                  id: uuidv4(),
-                  ...data,
-                  photo: fileData || ''
-                })
+      <div className="h-screen w-screen ">
+        {isEditMode && (
+          <dialog open className="backdrop:bg-red-400">
+            <CardForm
+              cat={currentCat}
+              cancel={() => setIsEditMode(false)}
+              confirm={async (data: CardFormData, fileData: string | null) => {
+                console.log(data)
+                if (currentCat == null) {
+                  addCat({
+                    id: uuidv4(),
+                    ...data,
+                    photo: fileData || ''
+                  })
+                } else {
+                  updateCat({
+                    id: currentCat?.id || '',
+                    ...data,
+                    photo: fileData || ''
+                  })
+                }
+                setIsEditMode(false)
+              }}
+            />
+          </dialog>
+        )}
+        {isConfirmationOpen && (
+          <dialog open>
+            <DialogConfirmation
+              cancel={() => setIsConfirmationOpen(false)}
+              confirm={() => {
+                setIsConfirmationOpen(false)
+                deleteCat(currentCat?.id || '')
+              }}
+              message={`Are you sure you want to delete ${currentCat?.name} ?`}
+              imageURL={currentCat?.photo}
+            />
+          </dialog>
+        )}
+
+        <SearchBar
+          onSearch={function (search: string): void {
+            setSearchQuery(search)
+          }}
+        />
+        <SortBy
+          onSort={function (order: 'ASC' | 'DESC'): void {
+            setSortByOrder(order)
+          }}
+        />
+
+        <div className="mx-auto flex w-full max-w-7xl flex-wrap gap-4">
+          {cats
+            .filter((cat: Cat) => {
+              return (
+                cat.name
+                  .toLowerCase()
+                  .includes(searchQuery.toLocaleLowerCase()) ||
+                cat.bio
+                  ?.toLocaleLowerCase()
+                  .includes(searchQuery.toLocaleLowerCase())
+              )
+            })
+            .sort((a: Cat, b: Cat) => {
+              if (sortByOrder === 'ASC') {
+                return a.name.localeCompare(b.name)
               } else {
-                updateCat({
-                  id: currentCat?.id || '',
-                  ...data,
-                  photo: fileData || ''
-                })
+                return b.name.localeCompare(a.name)
               }
-              setIsEditMode(false)
-            }}
-          />
-        </dialog>
-      )}
-      <div className="mx-auto flex w-full max-w-7xl flex-wrap gap-4">
-        {cats
-          .filter((cat: Cat) => {
-            return (
-              cat.name
-                .toLowerCase()
-                .includes(searchQuery.toLocaleLowerCase()) ||
-              cat.bio
-                ?.toLocaleLowerCase()
-                .includes(searchQuery.toLocaleLowerCase())
-            )
-          })
-          .sort((a: Cat, b: Cat) => {
-            if (sortByOrder === 'ASC') {
-              return a.name.localeCompare(b.name)
-            } else {
-              return b.name.localeCompare(a.name)
-            }
-          })
-          .map((cat: Cat) => (
-            <div key={cat.id} className="w-full md:h-72 md:max-w-sm">
-              <Card
-                cat={cat}
-                editClicked={() => {
-                  setCurrentCat(cat)
-                  setIsEditMode(true)
-                }}
-                deleteClicked={() => {
-                  setIsConfirmationOpen(true)
-                  setCurrentCat(cat)
-                }}
-              />
-            </div>
-          ))}
-        <div className="w-full md:h-72 md:max-w-sm">
-          <NewCard
-            onClick={() => {
-              setCurrentCat(null)
-              setIsEditMode(true)
-            }}
-          />
+            })
+            .map((cat: Cat) => (
+              <div key={cat.id} className="w-full md:h-72 md:max-w-sm">
+                <Card
+                  cat={cat}
+                  editClicked={() => {
+                    setCurrentCat(cat)
+                    setIsEditMode(true)
+                  }}
+                  deleteClicked={() => {
+                    setIsConfirmationOpen(true)
+                    setCurrentCat(cat)
+                  }}
+                />
+              </div>
+            ))}
+          <div className="w-full md:h-72 md:max-w-sm">
+            <NewCard
+              onClick={() => {
+                setCurrentCat(null)
+                setIsEditMode(true)
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>

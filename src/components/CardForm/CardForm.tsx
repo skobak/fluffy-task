@@ -48,6 +48,7 @@ export const CardForm: React.FC<CardFormProps> = ({ cancel, confirm, cat }) => {
       const reader = new FileReader()
       reader.onloadend = () => {
         // TODO: good to compress the image here, but out of scope for this demo
+        // And check format
         setFileData(reader.result as string)
       }
       reader.readAsDataURL(file)
@@ -57,98 +58,116 @@ export const CardForm: React.FC<CardFormProps> = ({ cancel, confirm, cat }) => {
   const birthdayDate = watch('birthdayDate')
 
   return (
-    <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label
-          htmlFor="name"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Name
-        </label>
-        <input
-          id="name"
-          {...register('name')}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-        />
-        {errors.name && (
-          <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>
-        )}
+    <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50">
+      <div className="rounded bg-white p-8 shadow-lg">
+        <h1 className="mb-4 text-2xl">{cat ? 'Edit Kitty' : 'Add Kitty'}</h1>
+        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label
+              htmlFor="name"
+              className="block text-base font-medium text-gray-900 "
+            >
+              Name
+            </label>
+            <input
+              id="name"
+              {...register('name')}
+              aria-label="Name"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2"
+            />
+            {errors.name && (
+              <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>
+            )}
+          </div>
+          <div>
+            <label
+              htmlFor="bio"
+              className="block text-base font-medium text-gray-900"
+            >
+              Bio
+            </label>
+            <textarea
+              id="bio"
+              {...register('bio')}
+              aria-label="Bio"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2"
+            ></textarea>
+          </div>
+          <div>
+            <label
+              htmlFor="birthdayDate"
+              className="block text-base font-medium text-gray-900"
+            >
+              Date of Birth
+            </label>
+            <DatePicker
+              selected={birthdayDate}
+              onChange={(date: Date) =>
+                setValue('birthdayDate', date, { shouldValidate: true })
+              }
+              className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2"
+            />
+            {errors.birthdayDate && (
+              <p className="mt-1 text-xs text-red-500">
+                {errors.birthdayDate.message}
+              </p>
+            )}
+          </div>
+          <div>
+            <label
+              htmlFor="gender"
+              className="block text-base font-medium text-gray-900"
+            >
+              Gender
+            </label>
+            <select
+              id="gender"
+              {...register('gender')}
+              aria-label="Gender"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2"
+            >
+              <option value="unknown">Unknown</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+            </select>
+            {errors.gender && (
+              <p className="mt-1 text-xs text-red-500">
+                {errors.gender.message}
+              </p>
+            )}
+          </div>
+          <div>
+            <label
+              htmlFor="file"
+              className="block text-base font-medium text-gray-900"
+            >
+              File
+            </label>
+            <input
+              id="file"
+              type="file"
+              onChange={handleFileChange}
+              aria-label="File"
+              className="mt-1 block w-full rounded-md border-gray-300  py-2"
+            />
+          </div>
+          <div className="flex flex-row justify-end gap-4">
+            <button
+              onClick={cancel}
+              className="rounded bg-gray-500 px-4 py-2 text-white shadow-lg transition duration-200 hover:bg-gray-600"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="rounded bg-blue-500 px-4 py-2 text-white shadow-lg transition duration-200 hover:bg-blue-600"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
-      <div>
-        <label
-          htmlFor="bio"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Bio
-        </label>
-        <textarea
-          id="bio"
-          {...register('bio')}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-        ></textarea>
-      </div>
-      <div>
-        <label
-          htmlFor="birthdayDate"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Date of Birth
-        </label>
-        <DatePicker
-          selected={birthdayDate}
-          onChange={(date: Date) =>
-            setValue('birthdayDate', date, { shouldValidate: true })
-          }
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-        />
-        {errors.birthdayDate && (
-          <p className="mt-1 text-xs text-red-500">
-            {errors.birthdayDate.message}
-          </p>
-        )}
-      </div>
-      <div>
-        <label
-          htmlFor="gender"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Gender
-        </label>
-        <select
-          id="gender"
-          {...register('gender')}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-        >
-          <option value="unknown">Unknown</option>
-          <option value="female">Female</option>
-          <option value="male">Male</option>
-        </select>
-        {errors.gender && (
-          <p className="mt-1 text-xs text-red-500">{errors.gender.message}</p>
-        )}
-      </div>
-      <div>
-        <label
-          htmlFor="file"
-          className="block text-sm font-medium text-gray-700"
-        >
-          File
-        </label>
-        <input
-          id="file"
-          type="file"
-          onChange={handleFileChange}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-        />
-      </div>
-      <button onClick={cancel}>Cancel</button>
-      <button
-        type="submit"
-        className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-      >
-        Submit
-      </button>
-    </form>
+    </div>
   )
 }
 
