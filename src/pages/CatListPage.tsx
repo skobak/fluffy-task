@@ -7,6 +7,7 @@ import DialogConfirmation from '../components/DialogConfirmation'
 import { Cat } from '../models/Cat'
 import CardForm, { CardFormData } from '../components/CardForm/CardForm'
 import SearchBar from '../components/SearchBar'
+import SortBy from '../components/SortBy'
 
 const CatListPage: React.FC = () => {
   const newCatBlank: Cat = {
@@ -23,6 +24,7 @@ const CatListPage: React.FC = () => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [currentCat, setCurrentCat] = useState<Cat>()
   const [searchQuery, setSearchQuery] = useState('')
+  const [sortByOrder, setSortByOrder] = useState<'ASC' | 'DESC'>('ASC')
 
   return (
     <div>
@@ -30,6 +32,13 @@ const CatListPage: React.FC = () => {
         <SearchBar
           onSearch={function (search: string): void {
             setSearchQuery(search)
+          }}
+        />
+      </div>
+      <div>
+        <SortBy
+          onSort={function (order: 'ASC' | 'DESC'): void {
+            setSortByOrder(order)
           }}
         />
       </div>
@@ -67,7 +76,6 @@ const CatListPage: React.FC = () => {
       <div className="flex w-full flex-wrap gap-4">
         {cats
           .filter((cat: Cat) => {
-            if (cat.name === undefined) return false
             return (
               cat.name
                 .toLowerCase()
@@ -76,6 +84,13 @@ const CatListPage: React.FC = () => {
                 ?.toLocaleLowerCase()
                 .includes(searchQuery.toLocaleLowerCase())
             )
+          })
+          .sort((a: Cat, b: Cat) => {
+            if (sortByOrder === 'ASC') {
+              return a.name.localeCompare(b.name)
+            } else {
+              return b.name.localeCompare(a.name)
+            }
           })
           .map((cat: Cat) => (
             <div key={cat.id}>
