@@ -1,39 +1,40 @@
 import React from 'react'
+import { Cat } from '../../models/Cat'
+import CardHeader from './components/CardHeader'
 import PlaceholderImage from './images/catPlaceholder.svg'
 
 interface CardProps {
-  title: string
-  description?: string
-  imgUrl?: string
-  imgAlt?: string
+  cat: Cat
+  editClicked: () => void
+  deleteClicked: () => void
 }
 
-const Card: React.FC<CardProps> = ({ title, description, imgUrl, imgAlt }) => {
-  const finalImgUrl = imgUrl || PlaceholderImage
-  const finalImgAlt = imgAlt || 'placeholder image'
-
+const Card: React.FC<CardProps> = ({ cat, editClicked, deleteClicked }) => {
   return (
     <div
       className="m-4 mx-auto max-w-md overflow-hidden rounded-xl bg-white shadow-md md:max-w-2xl"
       role="article"
-      aria-label={title}
+      aria-label={cat.name}
     >
+      {/* Here we are drilling props, since we don't know yet the complexity of the app 
+      And keep the Context(State) as simple as possible */}
+      <CardHeader editClicked={editClicked} deleteClicked={deleteClicked} />
       <div className="md:flex">
         <div className="p-10 md:shrink-0">
           <img
             className="h-48 w-full object-cover md:w-48"
-            src={finalImgUrl}
-            alt={finalImgAlt}
+            src={cat.photo ? cat.photo : PlaceholderImage}
+            alt="Cat photo"
           />
         </div>
         <div className="p-8">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-indigo-500">
-            {title}
+            {cat.name}
           </h2>
-          {!description && (
+          {!cat.bio && (
             <p className="mt-2 italic text-gray-300">No description provided</p>
           )}
-          {description && <p className="mt-2 text-gray-500">{description}</p>}
+          {cat.bio && <p className="mt-2 text-gray-500">{cat.bio}</p>}
         </div>
       </div>
     </div>

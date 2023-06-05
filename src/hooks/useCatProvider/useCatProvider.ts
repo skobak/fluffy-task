@@ -1,17 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
+import { Cat } from '../../models/Cat'
 import { getFromLocalStorage, saveToLocalStorage } from '../../utils'
 
 // This hook is act as a provider for cats data
 // and fake backend with localStorage
-export type Cat = {
-  id: string
-  photo: string
-  name: string
-  birthdayDate: string
-  gender: string
-  bio: string
-}
-
 export const useCatProvider = () => {
   const [cats, setCats] = useState<Cat[]>([])
 
