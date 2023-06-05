@@ -20,7 +20,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   }
 
   return (
-    <div className="flex items-center rounded-md border p-2">
+    <div className="flex w-full items-center rounded-md border p-2">
       <input
         className="grow px-2"
         type="text"
