@@ -38,7 +38,8 @@ const CatListPage: React.FC = () => {
                   updateCat({
                     id: currentCat?.id || '',
                     ...data,
-                    photo: fileData || ''
+                    photo:
+                      fileData !== null ? fileData : currentCat?.photo || ''
                   })
                 }
                 setIsEditMode(false)
