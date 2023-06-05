@@ -21,7 +21,7 @@ const schema = yup.object().shape({
   gender: yup.string().oneOf(['unknown', 'female', 'male']).required()
 })
 
-const CardForm: React.FC<CardFormProps> = ({ cancel, confirm, cat }) => {
+export const CardForm: React.FC<CardFormProps> = ({ cancel, confirm, cat }) => {
   const {
     register,
     handleSubmit,
