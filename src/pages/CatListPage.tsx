@@ -65,13 +65,14 @@ const CatListPage: React.FC = () => {
             setSearchQuery(search)
           }}
         />
-        <SortBy
-          onSort={function (order: 'ASC' | 'DESC'): void {
-            setSortByOrder(order)
-          }}
-        />
-
-        <div className="mx-auto flex w-full max-w-7xl flex-wrap gap-4">
+        <div className="mx-auto flex h-16 w-full max-w-7xl flex-wrap justify-end gap-4">
+          <SortBy
+            onSort={function (order: 'ASC' | 'DESC'): void {
+              setSortByOrder(order)
+            }}
+          />
+        </div>
+        <div className="mx-auto mb-6 grid w-full max-w-7xl grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
           {cats
             .filter((cat: Cat) => {
               return (
@@ -91,7 +92,7 @@ const CatListPage: React.FC = () => {
               }
             })
             .map((cat: Cat) => (
-              <div key={cat.id} className="w-full md:h-72 md:max-w-sm">
+              <div key={cat.id} className="w-full md:h-72">
                 <Card
                   cat={cat}
                   editClicked={() => {
@@ -105,7 +106,7 @@ const CatListPage: React.FC = () => {
                 />
               </div>
             ))}
-          <div className="w-full md:h-72 md:max-w-sm">
+          <div className="w-full md:h-72">
             <NewCard
               onClick={() => {
                 setCurrentCat(null)
