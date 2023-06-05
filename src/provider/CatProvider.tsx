@@ -1,14 +1,6 @@
 import { createContext } from 'react'
 import useCatProvider from '../hooks/useCatProvider'
-
-export type Cat = {
-  id: string
-  photo: string
-  name: string
-  birthdayDate: string
-  gender: string
-  bio: string
-}
+import { Cat } from '../models/Cat'
 
 type CatContextType = {
   cats: Cat[]
