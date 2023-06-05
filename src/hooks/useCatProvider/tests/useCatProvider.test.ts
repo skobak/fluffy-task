@@ -1,7 +1,8 @@
-import { Cat, useCatProvider } from '../useCatProvider'
+import { useCatProvider } from '../useCatProvider'
 import { describe, expect, it } from 'vitest'
 import { getFromLocalStorage } from '../../../utils'
 import { act, renderHook } from '@testing-library/react'
+import { Cat } from '../../../models/Cat'
 const catMock: Cat = {
   id: '1',
   name: 'name',

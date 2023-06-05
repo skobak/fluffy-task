@@ -1,9 +1,10 @@
 import { useContext, useState } from 'react'
 import NewCard from '../components/NewCard'
-import { Cat, CatContext } from '../provider/CatProvider'
+import { CatContext } from '../provider/CatProvider'
 import { v4 as uuidv4 } from 'uuid'
 import Card from '../components/Card'
 import DialogConfirmation from '../components/DialogConfirmation'
+import { Cat } from '../models/Cat'
 
 const CatListPage: React.FC = () => {
   const newCatBlank: Cat = {

@@ -22,19 +22,20 @@ export const LongName: Story = {
 
 export const ShortName: Story = {
   args: {
-    cat: { id: '1', title: 'Cat', description: 'This is a cat' }
+    cat: { id: '1', name: 'Cat', bio: 'This is a cat' }
   }
 }
 
 export const NoDescription: Story = {
   args: {
-    cat: { id: '1', title: 'Cat' }
+    cat: { id: '1', name: 'Cat' }
   }
 }
 
 export const WithImage: Story = {
   args: {
     cat: {
+      id: '2',
       name: 'Cat',
       bio: 'This is a cat',
       photo: 'https://skob.io/ava.jpeg'
