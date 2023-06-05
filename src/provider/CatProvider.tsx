@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { useCatProvider } from '../hooks/useCatProvider'
+import useCatProvider from '../hooks/useCatProvider'
 
 export type Cat = {
   id: string
