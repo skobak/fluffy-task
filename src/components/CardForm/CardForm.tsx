@@ -5,13 +5,13 @@ import * as yup from 'yup'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { Cat } from '../../models/Cat'
-
+import { v4 as uuidv4 } from 'uuid'
 export type CardFormData = Omit<Cat, 'id' | 'photo'>
 
 interface CardFormProps {
   cancel: () => void
   confirm: (data: CardFormData, fileData: string | null) => void
-  cat?: Cat
+  cat: Cat | null
 }
 
 const schema = yup.object().shape({
