@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import NewCard from '../components/NewCard'
 import { CatContext } from '../provider/CatProvider'
 import { v4 as uuidv4 } from 'uuid'
@@ -42,11 +42,12 @@ const CatListPage: React.FC = () => {
           <CardForm
             cat={currentCat}
             cancel={() => setIsEditMode(false)}
-            confirm={(data: CardFormData) => {
+            confirm={async (data: CardFormData, fileData: string | null) => {
               console.log(data)
               const updatedCat = {
                 id: currentCat?.id || '',
-                ...data
+                ...data,
+                photo: fileData || ''
               }
               updateCat(updatedCat)
               setIsEditMode(false)

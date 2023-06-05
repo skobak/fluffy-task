@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -10,7 +10,7 @@ export type CardFormData = Omit<Cat, 'id' | 'photo'>
 
 interface CardFormProps {
   cancel: () => void
-  confirm: (data: CardFormData) => void
+  confirm: (data: CardFormData, fileData: string | null) => void
   cat?: Cat
 }
 
@@ -38,7 +38,20 @@ const CardForm: React.FC<CardFormProps> = ({ cancel, confirm, cat }) => {
     resolver: yupResolver(schema)
   })
   const onSubmit = (data: CardFormData) => {
-    confirm(data)
+    confirm(data, fileData)
+  }
+  const [fileData, setFileData] = useState<string | null>(null)
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        // TODO: good to compress the image here, but out of scope for this demo
+        setFileData(reader.result as string)
+      }
+      reader.readAsDataURL(file)
+    }
   }
 
   const birthdayDate = watch('birthdayDate')
@@ -113,6 +126,20 @@ const CardForm: React.FC<CardFormProps> = ({ cancel, confirm, cat }) => {
         {errors.gender && (
           <p className="mt-1 text-xs text-red-500">{errors.gender.message}</p>
         )}
+      </div>
+      <div>
+        <label
+          htmlFor="file"
+          className="block text-sm font-medium text-gray-700"
+        >
+          File
+        </label>
+        <input
+          id="file"
+          type="file"
+          onChange={handleFileChange}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+        />
       </div>
       <button onClick={cancel}>Cancel</button>
       <button
