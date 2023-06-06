@@ -5,8 +5,7 @@ import * as yup from 'yup'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { Cat } from '../../models/Cat'
-import { v4 as uuidv4 } from 'uuid'
-export type CardFormData = Omit<Cat, 'id' | 'photo'>
+import { CardFormData } from './CardFormData'
 
 interface CardFormProps {
   cancel: () => void
@@ -47,8 +46,7 @@ export const CardForm: React.FC<CardFormProps> = ({ cancel, confirm, cat }) => {
     if (file) {
       const reader = new FileReader()
       reader.onloadend = () => {
-        // TODO: good to compress the image here, but out of scope for this demo
-        // And check format
+        // TODO: Possible improvment: check file size and type
         setFileData(reader.result as string)
       }
       reader.readAsDataURL(file)

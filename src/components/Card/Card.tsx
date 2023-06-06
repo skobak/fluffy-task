@@ -21,9 +21,9 @@ const Card: React.FC<CardProps> = ({ cat, editClicked, deleteClicked }) => {
         )}
       </div>
       <figure className="flex h-full flex-col md:flex-row">
-        <div className="h-auto max-h-72 p-4 md:h-64 md:w-32">
+        <div className="m-4 flex items-center rounded bg-gray-100 shadow-sm md:w-32">
           <img
-            className=" h-72 w-full object-scale-down md:h-auto"
+            className="max-h-64 w-full object-scale-down p-4 "
             src={cat.photo ? cat.photo : PlaceholderImage}
             alt={cat.photo ? `Photo of ${cat.name}` : 'Placeholder image'}
           />
