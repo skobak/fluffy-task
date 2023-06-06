@@ -21,8 +21,8 @@ const CatListPage: React.FC = () => {
   return (
     <div className="w-full p-8 md:p-0">
       {isEditMode && (
-        <dialog open className="backdrop:bg-red-400">
-          <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center overflow-y-scroll bg-black bg-opacity-50">
+        <dialog open className="w-full backdrop:bg-red-400">
+          <div className="fixed left-0 top-0 z-50 h-screen w-screen items-center justify-center overflow-auto md:flex md:bg-black md:bg-opacity-50">
             <CardForm
               cat={currentCat}
               cancel={() => setIsEditMode(false)}
