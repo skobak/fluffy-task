@@ -16,8 +16,8 @@ const DialogConfirmation: React.FC<DialogConfirmationProps> = ({
   imageURL
 }) => {
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50">
-      <div className="w-1/3 rounded-lg bg-white">
+    <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50 p-4 sm:p-0">
+      <div className="rounded-lg bg-white md:w-1/3">
         <div className="max-h-48 overflow-hidden">
           {imageURL && <img src={imageURL} alt="cat" />}
         </div>
