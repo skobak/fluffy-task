@@ -5,8 +5,7 @@ import * as yup from 'yup'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { Cat } from '../../models/Cat'
-
-export type CardFormData = Omit<Cat, 'id' | 'photo'>
+import { CardFormData } from './CardFormData'
 
 interface CardFormProps {
   cancel: () => void

@@ -4,10 +4,11 @@ import { CatContext } from '../provider/CatProvider'
 import Card from '../components/Card'
 import DialogConfirmation from '../components/DialogConfirmation'
 import { Cat } from '../models/Cat'
-import CardForm, { CardFormData } from '../components/CardForm'
+import CardForm from '../components/CardForm'
 import SearchBar from '../components/SearchBar'
 import SortBy from '../components/SortBy'
 import { v4 as uuidv4 } from 'uuid'
+import { CardFormData } from '../components/CardForm/CardFormData'
 
 const CatListPage: React.FC = () => {
   const { cats, addCat, deleteCat, updateCat } = useContext(CatContext)
