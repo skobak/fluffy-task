@@ -4,7 +4,7 @@ import { CatContext } from '../provider/CatProvider'
 import Card from '../components/Card'
 import DialogConfirmation from '../components/DialogConfirmation'
 import { Cat } from '../models/Cat'
-import CardForm, { CardFormData } from '../components/CardForm/CardForm'
+import CardForm, { CardFormData } from '../components/CardForm'
 import SearchBar from '../components/SearchBar'
 import SortBy from '../components/SortBy'
 import { v4 as uuidv4 } from 'uuid'
@@ -76,7 +76,7 @@ const CatListPage: React.FC = () => {
           }}
         />
       </div>
-      <div className="mb-6 grid  grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+      <div className="mb-6 grid h-64  grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         {cats
           .filter((cat: Cat) => {
             return (
@@ -110,7 +110,7 @@ const CatListPage: React.FC = () => {
               />
             </div>
           ))}
-        <div className="h-64 w-full sm:h-auto">
+        <div className="w-full md:h-72">
           <NewCard
             onClick={() => {
               setCurrentCat(null)
