@@ -1,3 +1,5 @@
+import { Cat } from '../models/Cat'
+
 export function classNames(...classes: unknown[]): string {
   return classes.filter(Boolean).join(' ')
 }
@@ -34,4 +36,22 @@ export async function makeFakeRequest(
   }
 
   return response.json() as Promise<ResponseData>
+}
+
+export const filterCats = (cats: Cat[], searchQuery: string): Cat[] => {
+  return cats.filter(
+    (cat: Cat) =>
+      cat.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      cat.bio?.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+}
+
+export const sortCats = (cats: Cat[], sortByOrder: 'ASC' | 'DESC'): Cat[] => {
+  return cats.sort((a: Cat, b: Cat) => {
+    if (sortByOrder === 'ASC') {
+      return a.name.localeCompare(b.name)
+    } else {
+      return b.name.localeCompare(a.name)
+    }
+  })
 }
