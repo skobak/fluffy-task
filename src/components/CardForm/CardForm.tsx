@@ -19,7 +19,11 @@ const schema = yup.object().shape({
   birthdayDate: yup
     .date()
     .required()
-    .max(new Date(), 'Birthday date must be in the past'),
+    // set max date to tomorrow
+    .max(
+      new Date(new Date().setDate(new Date().getDate() + 1)),
+      'Birthday date must be in the past'
+    ),
   gender: yup.string().oneOf(['unknown', 'female', 'male']).required()
 })
 
@@ -34,9 +38,7 @@ export const CardForm: React.FC<CardFormProps> = ({ cancel, confirm, cat }) => {
     defaultValues: {
       name: cat?.name ?? '',
       bio: cat?.bio ?? '',
-      birthdayDate: cat?.birthdayDate
-        ? new Date(cat.birthdayDate)
-        : new Date(Date.now()),
+      birthdayDate: cat?.birthdayDate ? new Date(cat.birthdayDate) : new Date(),
       gender: cat?.gender ?? 'unknown'
     },
     resolver: yupResolver(schema)
