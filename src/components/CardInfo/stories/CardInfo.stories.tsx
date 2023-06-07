@@ -14,7 +14,7 @@ export const LongNameWithoutDescription: Story = {
     cat: {
       id: '1',
       gender: 'Female',
-      birthdayDate: '2021-01-01',
+      birthdayDate: new Date('2021-01-01'),
       name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.'
     }
   }
@@ -25,7 +25,7 @@ export const LongNameWithoutPhoto: Story = {
     cat: {
       id: '1',
       gender: 'Female',
-      birthdayDate: '2021-01-01',
+      birthdayDate: new Date('2021-01-01'),
       name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum maurisLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris..'
     }
@@ -40,7 +40,7 @@ export const LongNameWithPhoto: Story = {
       photo: base64Photo,
       id: '1',
       gender: 'Female',
-      birthdayDate: '2021-01-01',
+      birthdayDate: new Date('2021-01-01'),
       name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum maurisLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris..'
     }
