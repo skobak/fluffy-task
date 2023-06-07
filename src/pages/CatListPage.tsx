@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useCallback, useContext, useMemo, useState } from 'react'
 import NewCard from '../components/NewCard'
 import { CatContext } from '../provider/CatProvider'
 import Card from '../components/Card'
@@ -9,6 +9,7 @@ import SearchBar from '../components/SearchBar'
 import SortBy from '../components/SortBy'
 import { v4 as uuidv4 } from 'uuid'
 import { CardFormData } from '../components/CardForm/CardFormData'
+import { filterCats, sortCats } from '../utils'
 
 const CatListPage: React.FC = () => {
   const { cats, addCat, deleteCat, updateCat } = useContext(CatContext)
@@ -18,6 +19,15 @@ const CatListPage: React.FC = () => {
   const [currentCat, setCurrentCat] = useState<Cat | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [sortByOrder, setSortByOrder] = useState<'ASC' | 'DESC'>('ASC')
+
+  const filteredCats = useMemo(
+    () => filterCats(cats, searchQuery),
+    [cats, searchQuery]
+  )
+  const filteredAndSortedCats = useMemo(
+    () => sortCats(filteredCats, sortByOrder),
+    [filteredCats, sortByOrder]
+  )
 
   return (
     <div className="w-full p-8 md:p-0">
@@ -78,39 +88,21 @@ const CatListPage: React.FC = () => {
         />
       </div>
       <div className="mb-6 grid h-64  grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-        {cats
-          .filter((cat: Cat) => {
-            return (
-              cat.name
-                .toLowerCase()
-                .includes(searchQuery.toLocaleLowerCase()) ||
-              cat.bio
-                ?.toLocaleLowerCase()
-                .includes(searchQuery.toLocaleLowerCase())
-            )
-          })
-          .sort((a: Cat, b: Cat) => {
-            if (sortByOrder === 'ASC') {
-              return a.name.localeCompare(b.name)
-            } else {
-              return b.name.localeCompare(a.name)
-            }
-          })
-          .map((cat: Cat) => (
-            <div key={cat.id} className="w-full md:h-72">
-              <Card
-                cat={cat}
-                editClicked={() => {
-                  setCurrentCat(cat)
-                  setIsEditMode(true)
-                }}
-                deleteClicked={() => {
-                  setIsConfirmationOpen(true)
-                  setCurrentCat(cat)
-                }}
-              />
-            </div>
-          ))}
+        {filteredAndSortedCats.map((cat: Cat) => (
+          <div key={cat.id} className="w-full md:h-72">
+            <Card
+              cat={cat}
+              editClicked={() => {
+                setCurrentCat(cat)
+                setIsEditMode(true)
+              }}
+              deleteClicked={() => {
+                setIsConfirmationOpen(true)
+                setCurrentCat(cat)
+              }}
+            />
+          </div>
+        ))}
         <div className="w-full md:h-72">
           <NewCard
             onClick={() => {

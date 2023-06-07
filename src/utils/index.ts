@@ -2,7 +2,16 @@ import {
   classNames,
   saveToLocalStorage,
   getFromLocalStorage,
-  makeFakeRequest
+  makeFakeRequest,
+  filterCats,
+  sortCats
 } from './utils'
 
-export { classNames, saveToLocalStorage, getFromLocalStorage, makeFakeRequest }
+export {
+  classNames,
+  saveToLocalStorage,
+  getFromLocalStorage,
+  makeFakeRequest,
+  filterCats,
+  sortCats
+}
