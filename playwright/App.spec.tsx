@@ -119,6 +119,7 @@ test('should sort by name', async ({ page }) => {
   // expect container is not null
   expect(container).toBeTruthy()
   // get all children of container
+  if (!container) throw new Error('container is null')
   const children = await container.$$(':scope > *')
   // get first child
   const firstChild = children[0]
