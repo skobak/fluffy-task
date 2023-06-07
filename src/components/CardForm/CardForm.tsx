@@ -19,7 +19,6 @@ const schema = yup.object().shape({
   birthdayDate: yup
     .date()
     .required()
-    // set max date to tomorrow
     .max(
       new Date(new Date().setDate(new Date().getDate() + 1)),
       'Birthday date must be in the past'
