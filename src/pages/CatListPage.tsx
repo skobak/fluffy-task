@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import NewCard from '../components/NewCard'
 import { CatContext } from '../provider/CatProvider'
 import Card from '../components/Card'
@@ -10,12 +10,14 @@ import SortBy from '../components/SortBy'
 import { v4 as uuidv4 } from 'uuid'
 import { CardFormData } from '../components/CardForm/CardFormData'
 import { filterCats, sortCats } from '../utils'
+import CardInfo from '../components/CardInfo'
 
 const CatListPage: React.FC = () => {
   const { cats, addCat, deleteCat, updateCat } = useContext(CatContext)
 
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
+  const [isCardInfoOpen, setIsCardInfoOpen] = useState(false)
   const [currentCat, setCurrentCat] = useState<Cat | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [sortByOrder, setSortByOrder] = useState<'ASC' | 'DESC'>('ASC')
@@ -31,8 +33,22 @@ const CatListPage: React.FC = () => {
 
   return (
     <div className="w-full p-8 md:p-0">
+      {isCardInfoOpen && (
+        <dialog open>
+          <div className="fixed left-0 top-0 z-50 h-screen w-screen items-center justify-center overflow-auto md:flex md:bg-black md:bg-opacity-50">
+            <div className="w-full md:max-w-7xl">
+              {currentCat && (
+                <CardInfo
+                  onCloseClicked={() => setIsCardInfoOpen(false)}
+                  cat={currentCat}
+                />
+              )}
+            </div>
+          </div>
+        </dialog>
+      )}
       {isEditMode && (
-        <dialog open className="w-full backdrop:bg-red-400">
+        <dialog open>
           <div className="fixed left-0 top-0 z-50 h-screen w-screen items-center justify-center overflow-auto md:flex md:bg-black md:bg-opacity-50">
             <CardForm
               cat={currentCat}
@@ -92,6 +108,10 @@ const CatListPage: React.FC = () => {
           <div key={cat.id} className="w-full md:h-72">
             <Card
               cat={cat}
+              openClicked={() => {
+                setCurrentCat(cat)
+                setIsCardInfoOpen(true)
+              }}
               editClicked={() => {
                 setCurrentCat(cat)
                 setIsEditMode(true)
