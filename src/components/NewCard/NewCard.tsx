@@ -8,6 +8,7 @@ interface AddButtonProps {
 const AddButton: React.FC<AddButtonProps> = ({ onClick }) => {
   return (
     <button
+      id="newCardButton"
       onClick={onClick}
       aria-label="Add new item"
       className="flex h-full w-full flex-col items-center justify-center overflow-hidden rounded text-gray-500
