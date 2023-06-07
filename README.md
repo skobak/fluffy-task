@@ -2,9 +2,9 @@
 Solution to a Front End [Assignment](https://github.com/budbee/frontend-assignment): 
 
 
-[Figma](https://www.figma.com/file/fGxk6D5nNuOadh1lBhEd2O/FurryFirendsFE?type=design&node-id=1%3A3346&t=R1E99VqUuKJZa3Ju-1)
+### [Figma](https://www.figma.com/file/fGxk6D5nNuOadh1lBhEd2O/FurryFirendsFE?type=design&node-id=1%3A3346&t=R1E99VqUuKJZa3Ju-1)
 
-[Demo](https://skobak.github.io/fluffy-task/)
+### [Demo](https://skobak.github.io/fluffy-task/)
 
 ## Known Limitations
 - The backend is simulated with local storage, and there is no check on file size during the upload. Please keep the files small to ensure they fit within local storage limits.
