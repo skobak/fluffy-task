@@ -1,3 +1,6 @@
+[![Deploy](https://github.com/skobak/fluffy-task/actions/workflows/deploy.yml/badge.svg)](https://github.com/skobak/fluffy-task/actions/workflows/deploy.yml)
+[![Run Tests](https://github.com/skobak/fluffy-task/actions/workflows/run-unit-e2e-test-on-main-pr.yml/badge.svg)](https://github.com/skobak/fluffy-task/actions/workflows/run-unit-e2e-test-on-main-pr.yml)
+
 # Furry-fe-assignment
 Solution to a Front End [Assignment](https://github.com/budbee/frontend-assignment): 
 
