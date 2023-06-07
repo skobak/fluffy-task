@@ -127,3 +127,19 @@ test('should sort by name', async ({ page }) => {
   const text = await firstChild.innerText()
   expect(text).toContain('MARVEL')
 })
+
+test('open the card', async ({ page }) => {
+  await page.goto(URL)
+  await page.click('text=Add')
+  await page.fill('input[name="name"]', 'Super cat')
+  await page.fill('textarea[name="bio"]', 'here is a cat description')
+  // fill gender
+  await page.selectOption('select[id="gender"]', 'Female')
+  await page.click('button:has-text("Submit")')
+  // click on open butotn
+  await page.click('button:has-text("Open")')
+  const element = await page.$('text=here is a cat description')
+  expect(element).toBeTruthy()
+  const genderElement = await page.$('text=Female')
+  expect(genderElement).toBeTruthy()
+})

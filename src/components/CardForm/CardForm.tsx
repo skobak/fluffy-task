@@ -16,7 +16,13 @@ interface CardFormProps {
 const schema = yup.object().shape({
   name: yup.string().required(),
   bio: yup.string(),
-  birthdayDate: yup.date().required(),
+  birthdayDate: yup
+    .date()
+    .required()
+    .max(
+      new Date(new Date().setDate(new Date().getDate() + 1)),
+      'Birthday date must be in the past'
+    ),
   gender: yup.string().oneOf(['unknown', 'female', 'male']).required()
 })
 

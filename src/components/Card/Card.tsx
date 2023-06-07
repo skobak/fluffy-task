@@ -45,6 +45,7 @@ const Card: React.FC<CardProps> = ({
           {openClicked && (
             <div className="bg-red-400">
               <button
+                name="open"
                 onClick={openClicked}
                 aria-label="Open card details"
                 className="
