@@ -16,7 +16,10 @@ interface CardFormProps {
 const schema = yup.object().shape({
   name: yup.string().required(),
   bio: yup.string(),
-  birthdayDate: yup.date().required(),
+  birthdayDate: yup
+    .date()
+    .required()
+    .max(new Date(), 'Birthday date must be in the past'),
   gender: yup.string().oneOf(['unknown', 'female', 'male']).required()
 })
 
@@ -31,7 +34,9 @@ export const CardForm: React.FC<CardFormProps> = ({ cancel, confirm, cat }) => {
     defaultValues: {
       name: cat?.name ?? '',
       bio: cat?.bio ?? '',
-      birthdayDate: cat?.birthdayDate ? new Date(cat.birthdayDate) : new Date(),
+      birthdayDate: cat?.birthdayDate
+        ? new Date(cat.birthdayDate)
+        : new Date(Date.now()),
       gender: cat?.gender ?? 'unknown'
     },
     resolver: yupResolver(schema)
