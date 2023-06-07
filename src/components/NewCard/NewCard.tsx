@@ -7,13 +7,15 @@ interface AddButtonProps {
 
 const AddButton: React.FC<AddButtonProps> = ({ onClick }) => {
   return (
-    <div
+    <button
       onClick={onClick}
-      className="flex h-full w-full flex-col items-center justify-center overflow-hidden rounded shadow-md"
+      aria-label="Add new item"
+      className="flex h-full w-full flex-col items-center justify-center overflow-hidden rounded text-gray-500
+  shadow-md hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
     >
-      <PlusIcon className="h-12 w-12 text-gray-500" />
-      <p className="text-gray-500">Add</p>
-    </div>
+      <PlusIcon className="h-12 w-12 " />
+      <p>Add</p>
+    </button>
   )
 }
 

@@ -16,15 +16,24 @@ const SortBy: React.FC<SortByProps> = ({ onSort }) => {
     onSort(newSortOrder)
   }
 
+  const accessibleLabel =
+    sortOrder === 'ASC'
+      ? 'Sort by name in ascending order'
+      : 'Sort by name in descending order'
+
   return (
-    <div className="flex cursor-pointer items-center" onClick={toggleSortOrder}>
+    <button
+      onClick={toggleSortOrder}
+      className="flex cursor-pointer items-center focus:outline-none focus:ring-2 focus:ring-blue-500"
+      aria-label={accessibleLabel}
+    >
       <p>Sort By Name</p>
       {sortOrder === 'ASC' ? (
         <ChevronUpIcon className="h-5 w-5 text-gray-500" />
       ) : (
         <ChevronDownIcon className="h-5 w-5 text-gray-500" />
       )}
-    </div>
+    </button>
   )
 }
 

@@ -23,16 +23,20 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     <div className="flex w-full items-center rounded-md border p-2">
       <input
         className="grow px-2"
-        type="text"
+        type="search"
         placeholder="Search..."
         value={search}
         onChange={handleSearchChange}
+        aria-label="Search"
       />
       {search ? (
-        <XMarkIcon
-          className="h-5 w-5 cursor-pointer text-gray-500"
+        <button
+          aria-label="Clear search"
+          className="focus:outline-none focus:ring-2 focus:ring-blue-500"
           onClick={clearSearch}
-        />
+        >
+          <XMarkIcon className="h-5 w-5 cursor-pointer text-gray-500" />
+        </button>
       ) : (
         <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
       )}

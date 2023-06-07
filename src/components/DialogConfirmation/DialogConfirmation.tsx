@@ -14,7 +14,10 @@ const DialogConfirmation: React.FC<DialogConfirmationProps> = ({
   imageURL
 }) => {
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50 p-4 sm:p-0">
+    <div
+      role="presentation"
+      className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50 p-4 sm:p-0"
+    >
       <div className="rounded-lg bg-white md:w-1/3">
         <div className="max-h-96 overflow-hidden">
           {imageURL && (
@@ -27,12 +30,14 @@ const DialogConfirmation: React.FC<DialogConfirmationProps> = ({
             <button
               className="mr-2 text-gray-700 hover:text-red-600"
               onClick={cancel}
+              aria-label="Cancel"
             >
               Cancel
             </button>
             <button
               className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
               onClick={confirm}
+              aria-label="Confirm"
             >
               Confirm
             </button>
