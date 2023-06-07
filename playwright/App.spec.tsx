@@ -2,9 +2,17 @@ import { test, expect } from '@playwright/test'
 
 const URL = 'http://localhost:5173'
 
+test('should show No furry friends message', async ({ page }) => {
+  await page.goto(URL)
+  const element = await page.$(
+    'text=No furry friends yet, be first to add a kitty'
+  )
+  expect(element).toBeTruthy()
+})
+
 test('should add a cat', async ({ page }) => {
   await page.goto(URL)
-  await page.click('text=Add')
+  await page.click('button[id="newCardButton"]')
   await page.fill('input[name="name"]', 'Super cat')
   await page.fill('textarea[name="bio"]', 'here is a cat description')
   await page.click('button:has-text("Submit")')
@@ -14,7 +22,7 @@ test('should add a cat', async ({ page }) => {
 
 test('should show no description provided ', async ({ page }) => {
   await page.goto(URL)
-  await page.click('text=Add')
+  await page.click('button[id="newCardButton"]')
   await page.fill('input[name="name"]', 'Super cat')
   await page.click('button:has-text("Submit")')
   const element = await page.$('text=No description provided')
@@ -23,7 +31,7 @@ test('should show no description provided ', async ({ page }) => {
 
 test('should edit cat', async ({ page }) => {
   await page.goto(URL)
-  await page.click('text=Add')
+  await page.click('button[id="newCardButton"]')
   await page.fill('input[name="name"]', 'Super cat')
   await page.fill('textarea[name="bio"]', 'here is a cat description')
   await page.click('button:has-text("Submit")')
@@ -37,7 +45,7 @@ test('should edit cat', async ({ page }) => {
 
 test('should delete cat', async ({ page }) => {
   await page.goto(URL)
-  await page.click('text=Add')
+  await page.click('button[id="newCardButton"]')
   await page.fill('input[name="name"]', 'Super cat')
   await page.fill('textarea[name="bio"]', 'here is a cat description')
   await page.click('button:has-text("Submit")')
@@ -49,7 +57,7 @@ test('should delete cat', async ({ page }) => {
 
 test('should cancel delete cat', async ({ page }) => {
   await page.goto(URL)
-  await page.click('text=Add')
+  await page.click('button[id="newCardButton"]')
   await page.fill('input[name="name"]', 'Super cat')
   await page.fill('textarea[name="bio"]', 'here is a cat description')
   await page.click('button:has-text("Submit")')
@@ -61,7 +69,7 @@ test('should cancel delete cat', async ({ page }) => {
 
 test('should show error message when name is empty', async ({ page }) => {
   await page.goto(URL)
-  await page.click('text=Add')
+  await page.click('button[id="newCardButton"]')
   await page.click('button:has-text("Submit")')
   const element = await page.$('text=name is a required field')
   expect(element).toBeTruthy()
@@ -69,11 +77,11 @@ test('should show error message when name is empty', async ({ page }) => {
 
 test('should filter cats by name', async ({ page }) => {
   await page.goto(URL)
-  await page.click('text=Add')
+  await page.click('button[id="newCardButton"]')
   await page.fill('input[name="name"]', 'Super cat')
   await page.fill('textarea[name="bio"]', 'here is a cat description')
   await page.click('button:has-text("Submit")')
-  await page.click('text=Add')
+  await page.click('button[id="newCardButton"]')
   await page.fill('input[name="name"]', 'Marvel')
   await page.fill('textarea[name="bio"]', 'Fluffy and cute')
   await page.click('button:has-text("Submit")')
@@ -84,13 +92,28 @@ test('should filter cats by name', async ({ page }) => {
   expect(element2).toBeTruthy()
 })
 
-test('should filter cats by bio and case insensitive', async ({ page }) => {
+test('should show No results message', async ({ page }) => {
   await page.goto(URL)
-  await page.click('text=Add')
+  await page.click('button[id="newCardButton"]')
   await page.fill('input[name="name"]', 'Super cat')
   await page.fill('textarea[name="bio"]', 'here is a cat description')
   await page.click('button:has-text("Submit")')
-  await page.click('text=Add')
+  await page.click('button[id="newCardButton"]')
+  await page.fill('input[name="name"]', 'Marvel')
+  await page.fill('textarea[name="bio"]', 'Fluffy and cute')
+  await page.click('button:has-text("Submit")')
+  await page.fill('input[name="search"]', '11111')
+  const element = await page.$('text=🙀 No results')
+  expect(element).toBeTruthy()
+})
+
+test('should filter cats by bio and case insensitive', async ({ page }) => {
+  await page.goto(URL)
+  await page.click('button[id="newCardButton"]')
+  await page.fill('input[name="name"]', 'Super cat')
+  await page.fill('textarea[name="bio"]', 'here is a cat description')
+  await page.click('button:has-text("Submit")')
+  await page.click('button[id="newCardButton"]')
   await page.fill('input[name="name"]', 'Marvel')
   await page.fill('textarea[name="bio"]', 'Fluffy and cute')
   await page.click('button:has-text("Submit")')
@@ -103,40 +126,32 @@ test('should filter cats by bio and case insensitive', async ({ page }) => {
 
 test('should sort by name', async ({ page }) => {
   await page.goto(URL)
-  await page.click('text=Add')
+  await page.click('button[id="newCardButton"]')
   await page.fill('input[name="name"]', 'Super cat')
   await page.fill('textarea[name="bio"]', 'here is a cat description')
   await page.click('button:has-text("Submit")')
-  await page.click('text=Add')
+  await page.click('button[id="newCardButton"]')
   await page.fill('input[name="name"]', 'Marvel')
   await page.fill('textarea[name="bio"]', 'Fluffy and cute')
   await page.click('button:has-text("Submit")')
   await page.click('button:has-text("Name")')
-  // click button by id sortButton
   await page.click('#sortButton')
-  // get container by id listOfCats on a page
   const container = await page.$('#listOfCats')
-  // expect container is not null
   expect(container).toBeTruthy()
-  // get all children of container
   if (!container) throw new Error('container is null')
   const children = await container.$$(':scope > *')
-  // get first child
   const firstChild = children[0]
-  // get text of first child
   const text = await firstChild.innerText()
   expect(text).toContain('MARVEL')
 })
 
 test('open the card', async ({ page }) => {
   await page.goto(URL)
-  await page.click('text=Add')
+  await page.click('button[id="newCardButton"]')
   await page.fill('input[name="name"]', 'Super cat')
   await page.fill('textarea[name="bio"]', 'here is a cat description')
-  // fill gender
   await page.selectOption('select[id="gender"]', 'Female')
   await page.click('button:has-text("Submit")')
-  // click on open butotn
   await page.click('button:has-text("Open")')
   const element = await page.$('text=here is a cat description')
   expect(element).toBeTruthy()
