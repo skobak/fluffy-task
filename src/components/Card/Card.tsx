@@ -7,7 +7,7 @@ interface CardProps {
   cat: Cat
   editClicked?: () => void
   deleteClicked?: () => void
-  openClicked: () => void
+  openClicked?: () => void
 }
 
 const Card: React.FC<CardProps> = ({
@@ -45,10 +45,11 @@ const Card: React.FC<CardProps> = ({
             )}
           </div>
           <div className="flex-1"></div>
-          <div className="bg-red-400">
-            <button
-              onClick={openClicked}
-              className="
+          {openClicked && (
+            <div className="bg-red-400">
+              <button
+                onClick={openClicked}
+                className="
               flex h-12 w-full
               items-center justify-center
               bg-red-400
@@ -59,11 +60,12 @@ const Card: React.FC<CardProps> = ({
               focus:ring-red-500
               focus:ring-offset-2
               "
-            >
-              <span className="sr-only">Open</span>
-              Open
-            </button>
-          </div>
+              >
+                <span className="sr-only">Open</span>
+                Open
+              </button>
+            </div>
+          )}
         </figcaption>
       </figure>
     </div>
