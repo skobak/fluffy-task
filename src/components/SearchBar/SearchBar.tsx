@@ -25,6 +25,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         className="grow px-2"
         type="search"
         placeholder="Search..."
+        name="search"
         value={search}
         onChange={handleSearchChange}
         aria-label="Search"

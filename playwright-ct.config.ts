@@ -27,6 +27,12 @@ export default defineConfig({
     /* Port to use for Playwright component endpoint. */
     ctPort: 3100
   },
+  webServer: {
+    command: 'npm run start',
+    port: 5173,
+    timeout: 120 * 1000,
+    reuseExistingServer: !process.env.CI
+  },
   /* Configure projects for major browsers */
   projects: [
     {

@@ -103,7 +103,10 @@ const CatListPage: React.FC = () => {
           }}
         />
       </div>
-      <div className="mb-6 grid h-64  grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+      <div
+        id="listOfCats"
+        className="mb-6 grid h-64  grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3"
+      >
         {filteredAndSortedCats.map((cat: Cat) => (
           <div key={cat.id} className="w-full md:h-72">
             <Card

@@ -24,6 +24,7 @@ const SortBy: React.FC<SortByProps> = ({ onSort }) => {
   return (
     <button
       onClick={toggleSortOrder}
+      id="sortButton"
       className="flex cursor-pointer items-center focus:outline-none focus:ring-2 focus:ring-blue-500"
       aria-label={accessibleLabel}
     >
