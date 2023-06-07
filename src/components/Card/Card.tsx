@@ -17,15 +17,12 @@ const Card: React.FC<CardProps> = ({
   openClicked
 }) => {
   return (
-    <div
-      className="flex h-full w-full flex-col overflow-hidden rounded bg-gray-50 shadow-md"
-      role="article"
-    >
-      <div className="h-12">
+    <article className="flex h-full w-full flex-col overflow-hidden rounded bg-gray-50 shadow-md">
+      <header className="h-12">
         {editClicked && deleteClicked && (
           <CardHeader editClicked={editClicked} deleteClicked={deleteClicked} />
         )}
-      </div>
+      </header>
       <figure className="flex h-full flex-col md:flex-row">
         <div className="m-4 flex items-center rounded bg-gray-100 shadow-sm md:w-32">
           <CatPhoto photo={cat.photo} alt={`Photo of ${cat.name}`} />
@@ -49,26 +46,26 @@ const Card: React.FC<CardProps> = ({
             <div className="bg-red-400">
               <button
                 onClick={openClicked}
+                aria-label="Open card details"
                 className="
               flex h-12 w-full
               items-center justify-center
-              bg-red-400
+              bg-blue-400
               text-white
-              hover:bg-red-500
+              hover:bg-blue-500
               focus:outline-none
               focus:ring-2
-              focus:ring-red-500
+              focus:ring-blue-500
               focus:ring-offset-2
               "
               >
-                <span className="sr-only">Open</span>
                 Open
               </button>
             </div>
           )}
         </figcaption>
       </figure>
-    </div>
+    </article>
   )
 }
 
