@@ -13,7 +13,7 @@ export const LongNameWithoutDescription: Story = {
   args: {
     cat: {
       id: '1',
-      gender: 'Female',
+      gender: 'female',
       birthdayDate: new Date('2021-01-01'),
       name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.'
     }
@@ -24,7 +24,7 @@ export const LongNameWithoutPhoto: Story = {
   args: {
     cat: {
       id: '1',
-      gender: 'Female',
+      gender: 'female',
       birthdayDate: new Date('2021-01-01'),
       name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum maurisLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris..'
@@ -39,7 +39,7 @@ export const LongNameWithPhoto: Story = {
     cat: {
       photo: base64Photo,
       id: '1',
-      gender: 'Female',
+      gender: 'female',
       birthdayDate: new Date('2021-01-01'),
       name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum maurisLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris..'
