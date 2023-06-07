@@ -3,7 +3,13 @@ Solution to a Front End assignment: https://github.com/budbee/frontend-assignmen
 
 Design prototype(Figma)
 [Figma](https://www.figma.com/file/fGxk6D5nNuOadh1lBhEd2O/FurryFirendsFE?type=design&node-id=1%3A3346&t=R1E99VqUuKJZa3Ju-1)
+[Demo](https://skobak.github.io/fluffy-task/)
 
+## Known Limitations
+- The backend is simulated with local storage, and there is no check on file size during the upload. Please keep the files small to ensure they fit within local storage limits.
+- There is no routing implemented for this assignment to speed up the development process.
+- Pagination has not been implemented for the same reason.
+- Currently, only the English version is available.
 
 ## Getting Started
 
