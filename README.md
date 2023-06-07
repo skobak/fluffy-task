@@ -1,8 +1,9 @@
 # Furry-fe-assignment
-Solution to a Front End assignment: https://github.com/budbee/frontend-assignment
+Solution to a Front End [Assignment](https://github.com/budbee/frontend-assignment): 
 
-Design prototype(Figma)
+
 [Figma](https://www.figma.com/file/fGxk6D5nNuOadh1lBhEd2O/FurryFirendsFE?type=design&node-id=1%3A3346&t=R1E99VqUuKJZa3Ju-1)
+
 [Demo](https://skobak.github.io/fluffy-task/)
 
 ## Known Limitations
