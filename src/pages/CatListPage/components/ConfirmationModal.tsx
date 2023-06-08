@@ -1,3 +1,4 @@
+import React from 'react'
 import DialogConfirmation from '../../../components/DialogConfirmation'
 import { Cat } from '../../../models/Cat'
 
@@ -11,18 +12,24 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   currentCat,
   onClose,
   deleteCat
-}) => (
-  <dialog open>
-    <DialogConfirmation
-      cancel={onClose}
-      confirm={() => {
-        onClose()
-        deleteCat(currentCat?.id || '')
-      }}
-      message={`Are you sure you want to delete ${currentCat?.name} ?`}
-      imageURL={currentCat?.photo}
-    />
-  </dialog>
-)
+}) => {
+  const handleConfirm = () => {
+    onClose()
+    deleteCat(currentCat?.id || '')
+  }
+
+  const message = `Are you sure you want to delete ${currentCat?.name} ?`
+
+  return (
+    <dialog open>
+      <DialogConfirmation
+        cancel={onClose}
+        confirm={handleConfirm}
+        message={message}
+        imageURL={currentCat?.photo}
+      />
+    </dialog>
+  )
+}
 
 export default ConfirmationModal
