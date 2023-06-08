@@ -84,6 +84,19 @@ const CatListPage: React.FC = () => {
         <SortBy onSort={(order) => setSortByOrder(order)} />
       </div>
 
+      {filteredAndSortedCats.length === 0 && cats.length !== 0 && (
+        <div className="mb-8">
+          <p className="text-center text-2xl text-gray-400">🙀 No results</p>
+        </div>
+      )}
+      {cats.length === 0 && (
+        <div className="mb-8 ">
+          <p className="text-center text-2xl text-gray-400">
+            No furry friends yet, be first to add a kitty
+          </p>
+        </div>
+      )}
+
       <div
         id="listOfCats"
         className="mb-6 grid h-64  grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3"
@@ -98,9 +111,11 @@ const CatListPage: React.FC = () => {
             />
           </div>
         ))}
-        <div className="w-full md:h-72">
-          <NewCard onClick={addNewCat} />
-        </div>
+        {searchQuery === '' && (
+          <div className="w-full md:h-72">
+            <NewCard onClick={addNewCat} />
+          </div>
+        )}
       </div>
     </div>
   )
