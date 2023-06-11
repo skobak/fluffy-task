@@ -2,13 +2,12 @@ import { useCallback, useEffect, useState } from 'react'
 import { Cat } from '../../models/Cat'
 import { getFromLocalStorage, saveToLocalStorage } from '../../utils'
 
-// This hook is act as a provider for cats data
 // and fake backend with localStorage
 export const useCatProvider = () => {
   const [cats, setCats] = useState<Cat[]>([])
 
-  const addCat = useCallback((cat: Cat) => {
-    setCats((prevCats) => [...prevCats, cat])
+  const addCat = useCallback((newCat: Cat) => {
+    setCats((prevCats) => [...prevCats, newCat])
   }, [])
 
   const updateCat = useCallback((updatedCat: Cat) => {

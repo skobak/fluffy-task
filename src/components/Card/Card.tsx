@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Cat } from '../../models/Cat'
 import CatPhoto from '../CatPhoto'
 import CardHeader from './components/CardHeader'
 
 interface CardProps {
   cat: Cat
-  editClicked?: () => void
-  deleteClicked?: () => void
-  openClicked?: () => void
+  editClicked?: (cat: Cat) => void
+  deleteClicked?: (cat: Cat) => void
+  openClicked?: (cat: Cat) => void
 }
 
 const Card: React.FC<CardProps> = ({
@@ -20,7 +20,10 @@ const Card: React.FC<CardProps> = ({
     <article className="flex h-full w-full flex-col overflow-hidden rounded bg-gray-50 shadow-md">
       <header className="h-12">
         {editClicked && deleteClicked && (
-          <CardHeader editClicked={editClicked} deleteClicked={deleteClicked} />
+          <CardHeader
+            editClicked={() => editClicked(cat)}
+            deleteClicked={() => deleteClicked(cat)}
+          />
         )}
       </header>
       <figure className="flex h-full flex-col md:flex-row">
@@ -46,7 +49,7 @@ const Card: React.FC<CardProps> = ({
             <div className="bg-red-400">
               <button
                 name="open"
-                onClick={openClicked}
+                onClick={() => openClicked(cat)}
                 aria-label="Open card details"
                 className="
               flex h-12 w-full
@@ -70,4 +73,4 @@ const Card: React.FC<CardProps> = ({
   )
 }
 
-export { Card }
+export default memo(Card)

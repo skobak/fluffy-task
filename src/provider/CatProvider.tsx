@@ -2,19 +2,13 @@ import { createContext } from 'react'
 import useCatProvider from '../hooks/useCatProvider'
 import { Cat } from '../models/Cat'
 
-type CatContextType = {
-  cats: Cat[]
+type CatMethodsContextType = {
   addCat: (cat: Cat) => void
   updateCat: (cat: Cat) => void
   deleteCat: (id: string) => void
 }
 
-type ContainerProps = {
-  children: React.ReactNode
-}
-
-const CatContextDefaultValues: CatContextType = {
-  cats: [],
+const CatMethodsContextDefaultValues: CatMethodsContextType = {
   addCat: () => {
     /* do nothing */
   },
@@ -26,16 +20,21 @@ const CatContextDefaultValues: CatContextType = {
   }
 }
 
-export const CatContext = createContext<CatContextType>(CatContextDefaultValues)
+export const CatsContext = createContext<Cat[]>([])
+export const CatMethodsContext = createContext<CatMethodsContextType>(
+  CatMethodsContextDefaultValues
+)
 
-export const CatProvider: React.FC<ContainerProps> = (
-  props: ContainerProps
-) => {
+type ContainerProps = {
+  children: React.ReactNode
+}
+
+export const CatProvider: React.FC<ContainerProps> = ({ children }) => {
   const { cats, addCat, updateCat, deleteCat } = useCatProvider()
 
   return (
-    <CatContext.Provider value={{ cats, addCat, updateCat, deleteCat }}>
-      {props.children}
-    </CatContext.Provider>
+    <CatMethodsContext.Provider value={{ addCat, updateCat, deleteCat }}>
+      <CatsContext.Provider value={cats}>{children}</CatsContext.Provider>
+    </CatMethodsContext.Provider>
   )
 }

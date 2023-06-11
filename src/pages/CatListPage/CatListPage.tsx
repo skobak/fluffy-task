@@ -1,6 +1,6 @@
-import React, { useContext, useMemo, useState } from 'react'
+import React, { useCallback, useContext, useMemo, useState } from 'react'
 import NewCard from '../../components/NewCard'
-import { CatContext } from '../../provider/CatProvider'
+import { CatMethodsContext, CatsContext } from '../../provider/CatProvider'
 import Card from '../../components/Card'
 import { Cat } from '../../models/Cat'
 import SearchBar from '../../components/SearchBar'
@@ -13,7 +13,8 @@ import ConfirmationModal from './components/ConfirmationModal'
 type SortOrder = 'ASC' | 'DESC'
 
 const CatListPage: React.FC = () => {
-  const { cats, addCat, deleteCat, updateCat } = useContext(CatContext)
+  const cats = useContext(CatsContext)
+  const { addCat, updateCat, deleteCat } = useContext(CatMethodsContext)
 
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
@@ -31,20 +32,32 @@ const CatListPage: React.FC = () => {
     [filteredCats, sortByOrder]
   )
 
-  const openCard = (cat: Cat) => {
-    setCurrentCat(cat)
-    setIsCardInfoOpen(true)
-  }
+  // useCallback for function below
+  const openCard = useCallback(
+    (cat: Cat) => {
+      setCurrentCat(cat)
+      setIsCardInfoOpen(true)
+    },
+    [setCurrentCat, setIsCardInfoOpen]
+  )
 
-  const editCard = (cat: Cat) => {
-    setCurrentCat(cat)
-    setIsEditMode(true)
-  }
+  // useCallback for function below
+  const editCard = useCallback(
+    (cat: Cat) => {
+      setCurrentCat(cat)
+      setIsEditMode(true)
+    },
+    [setCurrentCat, setIsEditMode]
+  )
 
-  const deleteCard = (cat: Cat) => {
-    setCurrentCat(cat)
-    setIsConfirmationOpen(true)
-  }
+  // useCallback for function below
+  const deleteCard = useCallback(
+    (cat: Cat) => {
+      setCurrentCat(cat)
+      setIsConfirmationOpen(true)
+    },
+    [setCurrentCat, setIsConfirmationOpen]
+  )
 
   const addNewCat = () => {
     setCurrentCat(null)
@@ -105,9 +118,9 @@ const CatListPage: React.FC = () => {
           <div key={cat.id} className="w-full md:h-72">
             <Card
               cat={cat}
-              openClicked={() => openCard(cat)}
-              editClicked={() => editCard(cat)}
-              deleteClicked={() => deleteCard(cat)}
+              openClicked={openCard}
+              editClicked={editCard}
+              deleteClicked={deleteCard}
             />
           </div>
         ))}
