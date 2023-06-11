@@ -1,2 +1,2 @@
-import { CatContext, CatProvider } from './CatProvider'
-export { CatContext, CatProvider }
+import { CatsContext, CatMethodsContext, CatProvider } from './CatProvider'
+export { CatsContext, CatMethodsContext, CatProvider }
